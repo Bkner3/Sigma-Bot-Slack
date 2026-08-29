@@ -1,0 +1,25 @@
+{
+  "name": "sigma-bot-slack",
+  "version": "1.0.0",
+  "description": "THE MOST SIGMA BOT TO SLACK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bkner3/Sigma-Bot-Slack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bkner3/Sigma-Bot-Slack/issues"
+  },
+  "homepage": "https://github.com/Bkner3/Sigma-Bot-Slack#readme",
+  "dependencies": {
+    "@slack/bolt": "^5.0.0",
+    "dotenv": "^17.4.2"
+  }
+}
