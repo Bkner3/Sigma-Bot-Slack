@@ -54,8 +54,10 @@ app.command("/sigmabot-help", async ({ ack, respond }) => {
     text:
 `Available Commands:
 /sigmabot-ping - Check bot latency
-/sigmabot-do-nothing - Makes sigma bot do nothing`
-  });
+/sigmabot-do-nothing - Makes sigma bot do nothing
+/sigmabot-joke - Says a joke.
+/sigmabot-catfact - Says a cat fact
+`  });
 });
 (async () => {
   await app.start();
