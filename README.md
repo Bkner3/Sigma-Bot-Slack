@@ -1,12 +1,20 @@
 # Sigma-Bot-Slack
 
-**THE MOST SIGMA BOT FOR SLACK**
+> **THE MOST SIGMA BOT FOR SLACK**
 
-SigmaBot is a simple Slack bot built with Node.js, Slack Bolt, and Axios.
+A simple Slack bot built with **Node.js**, **Slack Bolt**, and **Axios**.
 
-SigmaBot runs in Socket Mode and provides several slash commands to check the bot's latency, get random cat facts, tell jokes, and do absolutely nothing.
+SigmaBot runs in **Socket Mode** and provides slash commands for latency checks, random cat facts, jokes, and, of course, doing absolutely nothing.
 
-## Technologies
+## Features
+
+* `/sigmabot-ping` — checks the bot's latency
+* `/sigmabot-catfact` — fetches a random cat fact
+* `/sigmabot-joke` — fetches a random joke
+* `/sigmabot-do-nothing` — does... nothing
+* `/sigmabot-help` — displays available commands
+
+## Tech Stack
 
 * Node.js
 * Slack Bolt
@@ -15,124 +23,144 @@ SigmaBot runs in Socket Mode and provides several slash commands to check the bo
 * Cat Facts API
 * Official Joke API
 
-## Features
-
-* `ping` — checks the bot's latency.
-* `catfact` — fetches a random cat fact.
-* `joke` — fetches a random joke.
-* `do-nothing` — does... nothing.
-* `help` — displays the available commands.
-
 ## Requirements
 
-Before getting started, you need:
+Before getting started, make sure you have:
 
 * Node.js installed
 * A Slack application
-* A Bot Token
+* A Slack Bot Token
 * An App-Level Token with Socket Mode enabled
 
 ## Installation
 
-1. Clone this repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Bkner3/Sigma-Bot-Slack.git
 cd Sigma-Bot-Slack
 ```
-2. Install the dependencies
+
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-3. Configure environment variables
+### 3. Configure environment variables
 
-Create a .env file in the root directory:
+Create a `.env` file in the root directory:
 
+```env
 SLACK_BOT_TOKEN=xoxb-your-bot-token
 SLACK_APP_TOKEN=xapp-your-app-token
+```
 
-Never share your Slack tokens or commit them directly to your code.
+**Never share your Slack tokens or commit them to your repository.**
 
-It is also recommended to add .env to your .gitignore:
+Add `.env` to `.gitignore`:
 
+```gitignore
 node_modules/
 .env
+```
 
-Slack Configuration
+## Slack Configuration
 
-To use the bot, create a Slack application and enable Socket Mode.
+Create a Slack application and enable **Socket Mode**.
 
-The bot uses two environment variables:
+The bot requires two environment variables:
 
-Variable	Description
-SLACK_BOT_TOKEN	Token used by the bot to authenticate with Slack
-SLACK_APP_TOKEN	Token used to establish the connection through Socket Mode
+| Variable          | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `SLACK_BOT_TOKEN` | Token used to authenticate the bot with Slack      |
+| `SLACK_APP_TOKEN` | Token used to establish the Socket Mode connection |
 
-After configuring the application, add the following Slash Commands:
+Register these Slash Commands in your Slack application:
 
+```text
 /sigmabot-ping
 /sigmabot-catfact
 /sigmabot-joke
 /sigmabot-do-nothing
 /sigmabot-help
+```
 
-Since the bot uses Socket Mode, you do not need to configure a public HTTP endpoint to receive events.
+Since SigmaBot uses Socket Mode, **no public HTTP endpoint is required**.
 
-Running the Bot
+## Running the Bot
 
 Start the bot with:
 
+```bash
 node index.js
+```
 
-If your main file has a different name, replace index.js with the appropriate filename.
+If your main file has a different name, replace `index.js` accordingly.
 
-When the bot starts successfully, you should see:
+A successful startup should display:
 
+```text
 bot is running!
-Commands
-/sigmabot-ping
+```
+
+## Commands
+
+### `/sigmabot-ping`
 
 Checks the latency between Slack and the bot.
 
-Example:
+**Example:**
 
+```text
 Pong!
+
 Latency: 42ms
-/sigmabot-catfact
+```
+
+### `/sigmabot-catfact`
 
 Fetches a random cat fact using the Cat Facts API.
 
-Example:
+**Example:**
 
+```text
 Cat Fact:
+
 Cats have five toes on their front paws.
-/sigmabot-joke
+```
+
+### `/sigmabot-joke`
 
 Fetches a random joke using the Official Joke API.
 
-Example:
+**Example:**
 
+```text
 Joke:
+
 Why did the chicken cross the road?
 
 To get to the other side!
-/sigmabot-do-nothing
+```
+
+### `/sigmabot-do-nothing`
 
 The most important command in the project.
 
-Response:
+**Response:**
 
+```text
 Sigma-bot does nothing!!!
-/sigmabot-help
+```
 
-Displays the available bot commands.
+### `/sigmabot-help`
 
-Project Structure
+Displays all available SigmaBot commands.
 
-A simple project structure may look like this:
+## Project Structure
 
+```text
 sigmabot/
 ├── node_modules/
 ├── .env
@@ -140,46 +168,51 @@ sigmabot/
 ├── index.js
 ├── package.json
 └── package-lock.json
-Dependencies
+```
 
-The main dependencies used by the project are:
+## Dependencies
 
+Main dependencies:
+
+```json
 {
   "@slack/bolt": "...",
   "axios": "...",
   "dotenv": "..."
 }
+```
 
-They can be installed with:
+Install them manually with:
 
+```bash
 npm install @slack/bolt axios dotenv
-External APIs
+```
 
-SigmaBot uses two public APIs:
+## External APIs
 
-Cat Facts API
+### Cat Facts API
 
-Used by the /sigmabot-catfact command.
+Used by `/sigmabot-catfact`.
 
-Endpoint:
-
+```text
 https://catfact.ninja/fact
-Official Joke API
+```
 
-Used by the /sigmabot-joke command.
+### Official Joke API
 
-Endpoint:
+Used by `/sigmabot-joke`.
 
+```text
 https://official-joke-api.appspot.com/random_joke
+```
 
-If either API is unavailable, the bot sends an error message instead of stopping the application.
+If either API is unavailable, SigmaBot sends an error message instead of stopping the application.
 
-Adding New Commands
+## Adding New Commands
 
-New commands can be added using app.command() from Slack Bolt.
+New commands can be created using `app.command()` from Slack Bolt:
 
-Example:
-
+```js
 app.command("/command-name", async ({ ack, respond }) => {
   await ack();
 
@@ -187,30 +220,38 @@ app.command("/command-name", async ({ ack, respond }) => {
     text: "Hello from SigmaBot!"
   });
 });
+```
 
-After creating the command in the code, you also need to register it in your Slack application configuration.
+After adding the command to the code, register it in your Slack application configuration as well.
 
-Security
+## Security
 
-Never put tokens directly in your source code:
+**Never put tokens directly in your source code.**
 
-// Don't do this
+Don't do this:
+
+```js
 const token = "xoxb-...";
+```
 
-Always use environment variables:
+Instead, use environment variables:
 
+```js
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
   socketMode: true
 });
+```
 
-And keep your .env file out of Git:
+Always keep `.env` out of Git:
 
+```gitignore
 .env
-License
+```
+
+## License
+
 Copyright (c) 2026 Bernardo
 
-Licensed under the MIT License.
-
-
+Licensed under the **MIT License**.
